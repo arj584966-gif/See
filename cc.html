@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Happy Birthday Ritika 🎂</title>
+    <!-- Google Font for a beautiful, decorative look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #fde4e1, #fff);
+            font-family: 'Dancing Script', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            width: 100%;
+            padding-bottom: 50px;
+        }
+
+        .greeting {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #ff3399;
+            text-shadow: 2px 2px 5px #ffccff;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-in, transform 1.5s ease-in, top 0.5s ease-out;
+            z-index: 10;
+            position: absolute;
+            top: 20%;
+        }
+        
+        /* New class to move the greeting up */
+        .greeting.move-up {
+            top: 5%;
+        }
+
+        .visible-greeting {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .click-text {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 20px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .cake-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+            margin-right: 50px;
+        }
+
+        .cake-container:hover {
+            transform: scale(1.05);
+        }
+
+        .cake {
+            position: relative;
+            width: 250px;
+            height: 180px;
+        }
+
+        .layer {
+            width: 100%;
+            height: 60px;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .layer:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        .layer1 { background-color: #ffc0cb; }
+        .layer2 { background-color: #f7a399; }
+        .layer3 { background-color: #90d4a9; }
+
+        .cream {
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            height: 25px;
+            background-color: #fff;
+            border-radius: 0 0 50% 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .candle {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 15px;
+            height: 70px;
+            background: linear-gradient(#b833ff, #6214a1);
+            border-radius: 4px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .flame {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 25px;
+            background: radial-gradient(circle at 50% 30%, yellow, orange, red);
+            border-radius: 50% 50% 50% 50%;
+            animation: flicker 0.2s infinite alternate;
+            box-shadow: 0 0 15px 5px rgba(255, 200, 0, 0.8);
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 1; }
+            50% { transform: translateX(-52%) scale(1.1); opacity: 0.85; }
+            100% { transform: translateX(-48%) scale(0.9); opacity: 1; }
+        }
+
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 8px;
+            height: 16px;
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .message-button {
+            background-color: #ff69b4;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: scale(0.8);
+            margin-top: 20px; /* Added to separate the button from other elements */
+        }
+
+        .message-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+
+        .message-button.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .message-box {
+            position: relative;
+            width: 80%; /* Adjusted width for better mobile display */
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            opacity: 0;
+            transition: opacity 1s ease-in;
+            text-align: center;
+            margin-top: 20px; /* Added to separate from button */
+            z-index: 1; /* Ensure it's not behind other elements */
+        }
+
+        .message-box.show {
+            opacity: 1;
+        }
+
+        .message-box p {
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 600px) {
+            .greeting {
+                font-size: 2.5rem;
+            }
+            .message-box {
+                font-size: 1rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="greeting" id="greeting">Happy Birthday Ritika</div>
+
+    <div class="container">
+        <div class="cake-container" onclick="handleCakeClick()">
+            <div class="cake">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                <div class="layer layer1">
+                    <div class="cream"></div>
+                </div>
+                <div class="layer layer2">
+                    <div class="cream"></div>
+                </div>
+                <div class="layer layer3"></div>
+            </div>
+        </div>
+    </div>
+
+    <button class="message-button" id="message-button">Click for a message!</button>
+
+    <div class="message-box" id="message-box">
+        <p>Dearest Ritika, wishing you a birthday filled with joy, laughter, and all the happiness in the world! and Sorry yaar mene tumhara kbhi dil dukhaya ho toh, us din mujhe schme chinta hogyi thi shyd mene over possesively treat kiya ho tumhe, ho jata h yaar kbhi kbhi.. Kher jane do us baat ko, Wishing you a very happy birthday, Party due rhegi tumhari😉and Keep smiling happiness looks gorgeous on you..</p>
+    </div>
+
+    <div class="click-text" id="click-text">Click the cake!</div>
+    <div class="confetti" id="confetti-container"></div>
+
+    <script>
+        const partyColors = ['#ff70a6', '#ff9770', '#ffc270', '#b833ff', '#9dd7ff', '#70ffb0'];
+        const greetingElement = document.getElementById('greeting');
+        const clickTextElement = document.getElementById('click-text');
+        const confettiContainer = document.getElementById('confetti-container');
+        const messageButton = document.getElementById('message-button');
+        const messageBox = document.getElementById('message-box');
+        let hasBeenClicked = false;
+
+        /**
+         * Creates a single confetti piece.
+         */
+        function createConfettiPiece() {
+            const confettiPiece = document.createElement('div');
+            confettiPiece.className = 'confetti-piece';
+            confettiPiece.style.backgroundColor = partyColors[Math.floor(Math.random() * partyColors.length)];
+            confettiPiece.style.left = `${Math.random() * 100}vw`;
+            confettiPiece.style.top = `${-10}px`;
+            
+            confettiContainer.appendChild(confettiPiece);
+
+            // Clean up the confetti piece after it falls
+            setTimeout(() => {
+                confettiPiece.remove();
+            }, 5000);
+        }
+
+        /**
+         * Explodes confetti from the cake.
+         */
+        function explodeConfetti() {
+            for (let i = 0; i < 50; i++) {
+                createConfettiPiece();
+            }
+        }
+
+        /**
+         * Handles the click event on the cake.
+         * It shows the greeting and triggers the confetti.
+         */
+        function handleCakeClick() {
+            if (!hasBeenClicked) {
+                // Hide the "Click the cake" text
+                clickTextElement.style.display = 'none';
+                
+                // Show the greeting with animation
+                greetingElement.classList.add('visible-greeting');
+                
+                // Explode confetti
+                explodeConfetti();
+                
+                hasBeenClicked = true;
+
+                // Show the message button after 3 seconds
+                setTimeout(() => {
+                    messageButton.classList.add('show');
+                }, 3000);
+            }
+        }
+
+        /**
+         * Handles the click event on the message button.
+         * It reveals the hidden message.
+         */
+        messageButton.addEventListener('click', () => {
+            // Move the greeting text up
+            greetingElement.classList.add('move-up');
+            // Show the message box
+            messageBox.classList.add('show');
+        });
+
+        // Add an event listener to the body to handle the reverse movement
+        document.body.addEventListener('click', (event) => {
+            // Check if the greeting is currently in the "moved up" state
+            const isGreetingMovedUp = greetingElement.classList.contains('move-up');
+
+            // Check if the clicked target is either the message button or within the message box
+            const isClickOnInteractiveArea = event.target === messageButton || messageBox.contains(event.target);
+
+            // If the greeting is moved up and the click is outside the interactive area, reset all elements
+            if (isGreetingMovedUp && !isClickOnInteractiveArea) {
+                // Return the greeting to its original position
+                greetingElement.classList.remove('move-up');
+                // Hide the message box
+                messageBox.classList.remove('show');
+            }
+        });
+
+    </script>
+</body>
+</html>
